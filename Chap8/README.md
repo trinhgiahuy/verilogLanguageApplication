@@ -17,10 +17,12 @@ For multiple continous assignment, the **wire**, **wand** and **wor** will resol
 
 `
 wire
-	0	1	Z	X
-0	0	X	0	X
-1	X	1	1	X
-Z	0	1	Z	X
-X	X	X	X	X
+
+|   | 0  | 1  | Z  | X  |
+|---|----|----|----|----|
+| 0 | 0  | X  | 0  | X  |
+| 1 | X  | 1  | 1  | X  |
+| Z | 0  | 1  | Z  | X  |
+| X | X  | X  | X  | X  |
 `
 
