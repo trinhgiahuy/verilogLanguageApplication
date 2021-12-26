@@ -80,7 +80,9 @@ always @(a or b or sel)
 
 ```
 
-**Conditional Operator Review** : can be replace a simple combinational procedure with a continuous assignment. Target must be net. Event control is assumed
+## Conditional Operator Review 
+
+can be replace a simple combinational procedure with a continuous assignment. Target must be net. Event control is assumed
 ```
 module procedural_if(
   input  [3:0]  a,b,c,
@@ -112,8 +114,13 @@ endmodule
 ```
 
 
-**Remember:** continous assignment to nets and procedure assignment to variables. The net can be a vector or scalar, indexed part select, constant bit or part select of a vector.
-Concatenation is also support with scallar
+## Remember:
+* Continous assignment to nets, using **assign** and only outside procedure block.The net can be a vector or scalar, indexed part select, constant bit or part select of a vector.
+Concatenation is also support with scallar.
+* Multiple continous assignment to net: Verilog resolves the value of multiple drivers of a net
+* Procedure assignment to variables, using **=** and only inside procedure block. 
+* Multiple procedure assignment to variable: The last procedural assignment to variable "wins"
+
 
 ```
 module Conti_Assignment (addr1,addr2,wr,din,valid1,valid2,dout);
@@ -171,7 +178,7 @@ endmodule
 
 ---
 
-**Combination Feedback Loop** - **BE CAREFUL**
+## Combination Feedback Loop - **BE CAREFUL**
 
 Zero-delay feedback loops may cause simulator to apprear to "lock up". The process never finish or suspends, The simulator never gets to do anything else.
 
@@ -186,6 +193,72 @@ always @*
 ```
 ---
 
-### Generate 
+## Generate 
+
+### Conditional if generation
+
+* instances, functions, tasks, variables, and procedural blocks
+* label not required to create generate-if scope
+```
+module multiplier(a,b,product);
+  parameter a_width = 8, b_width = 8;
+  localparam product_width = a_width + b_width;  		--cannot be modified directly with the defparam statement or the module instance statement #
+  input [a_width-1:0] a;
+  input [b_width-1:0] b;
+  output [product_width-1:0] product;
+
+    generate
+      if ((a_width < 8) || (b_width < 8)) begin : mult
+	 CLA_multiplier #(a_width,b_width) u1(a,b,product);
+	 // Instantiate a CLA multiplier
+      end 
+      else begin: mult
+	 WALLACE_multiplier #(a_width,b_width) u1(a,b,product);  --the hierarchincal instance name is mult.u1
+      end
+   endgenerate
+endmodule
+```
+
+### Conditional case generation
+
+* instances, functions, tasks, variables, and procedural blocks
+* label not required to create generate-case scope
+```
+generate
+  case (WIDTH)
+    1: begin: adder // 1-bit adder implementation
+         adder_1bit x1(co,sum,a,b,ci);
+       end
+    2: begin : adder //2-bit adder implementation
+         adder_2bit x1(co,sum,a,b,ci);
+       end
+    default:
+       begin: adder // other - CLA
+         adder_cla #(WIDTH) x1(co,sum,a,b,ci);
+       end
+  endcase
+endgenerate
+```
+
+### Iterative generation
+
+* instances variables, and procedural blocks (**no function task**)
+* label is required to create generate-for scope
+
+A paramterized gray-code-to-binary-code converter module using a loop to generate continuous assignment
+```
+module gray2bin1(bin, gray);
+  paramter SIZE = 8; // this module is paramterizable
+  output [SIZE-1:0] bin;
+  input [SIZE-1:0] gray;
+
+  genvar i;
+  generate
+    for (i=0; i <SIZE; i=i+1) begin: bitnum  //require label for scoping name
+      assign bin[i] = ^gray[SIZE-1:i];  // i refer to the implicitly defined localparam whose value in each instance of the generate block is the value of the genvar when it was elaborated.
+    end
+  endgenerate
+endmodule
+```
 
 
