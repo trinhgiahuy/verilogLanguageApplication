@@ -201,6 +201,9 @@ c---			c--
      +--p		    +--q	         
 b---/			b--/
 
+// For blocking assignment, simulator
+// Immediately updates the assignment a to m & calculate new value for p
+// Immediately updates the assignment c to m & calculate new value for q
 
 always@ (a,b,c)
   begin
@@ -217,4 +220,8 @@ a---			c--
      +--p		    +--q	         
 b---/			b--/
 
+// For nonblocking assignment, simulator
+// Schedules the assignment of a to m and immidiately replaces it with a **SCHEDULED** assignment of c to m.
+// Upon updating the m var it gets the value of c not a, The simulator reexecute the procedure block due to transition of m&n,
+// Calculate new val of p & q that use c value of m
 ```
