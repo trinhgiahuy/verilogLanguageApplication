@@ -189,11 +189,11 @@ Example of 2 cases
 ```
 always@ (a,b,c)
   begin
-    m <= a;
-    n <= b;  // m and n are **not** temp vars
-    p <= m + n;
-    m <= c;
-    q <= m + n;
+    m = a;
+    n = b;  // m and n are temp vars
+    p = m + n;
+    m = c;
+    q = m + n;
   end
 
 c---			c--
@@ -204,12 +204,13 @@ b---/			b--/
 
 always@ (a,b,c)
   begin
-    m = a;
-    n = b;  // m and n are temp vars
-    p = m + n;
-    m = c;
-    q = m + n;
+    m <= a;
+    n <= b;  // m and n are **not** temp vars
+    p <= m + n;
+    m <= c;
+    q <= m + n;
   end
+
 
 a---			c--
     \			   \
