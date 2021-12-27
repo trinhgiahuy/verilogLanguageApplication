@@ -225,3 +225,16 @@ b---/			b--/
 // Upon updating the m var it gets the value of c not a, The simulator reexecute the procedure block due to transition of m&n,
 // Calculate new val of p & q that use c value of m
 ```
+
+## CHAP SUMMARY
+
+1. Main difference btw blocking and nonblocking?
+* Blocking assignment (=) block execution of subsequent statements until the assignment completes
+* Nonblocking assignment (<=) calculate the RHS expression, schedule an update to the LHS var
+2. When use blocking assignment?
+* Using blocking assignments in procedures that represent purely **combinational logic**
+3. When use nonblocking assignment?
+* Using nonblocking assignments for var that represent storage, procedure represent the **sequential logic**
+4. Where can mix ?
+* Blocking assignment to intermediate (temp) vars in a sequential procedure.
+
