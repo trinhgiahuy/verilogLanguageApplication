@@ -82,7 +82,9 @@ endfunction
 DIFFERENCE BTW FUNCTION AND TASK
 
 
-| Functions               								   | Tasks					    |
-|------------------------------------------------------------------------------------------|------------------------------------------------|
-|Cannot have time-controlling, statement/delay, hence executes in same simulation time unit|Can contain, may only coplete at some other time|
-|cannot enable a task									   |Can enable tasks and functions                  |
+| Functions               								   | Tasks					    			  	|
+|------------------------------------------------------------------------------------------|----------------------------------------------------------------------|
+|Cannot have time-controlling, statement/delay, hence executes in same simulation time unit|Can contain, may only coplete at some other time			  |
+|cannot enable a task									   |Can enable tasks and functions                  			  |
+|Should have at least 1input, cannot have output/inout arguments			   |Can have zero or more arguments of any type     			  |
+|Can return only a single value                                   			   |Can return a value, but can achieve same effect using output arguments|
