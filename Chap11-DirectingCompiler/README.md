@@ -78,3 +78,18 @@ endmodule
 - You implicitly declare a net when you previously undeclared identifier in a port expression or terminal list or as the lvalue of continuous assignment. The net by default will becomes a **wire**
 - You can set the value of `default_nettype directive **tri tri0 tri1 trianhd trio trireg wand wire wor none(from verilog 2001)**
 - Set **`default_nettype none**, undeclared signal will become syntax error => Reduce potential for typographical error
+
+Compiler Directives 	        	|													|
+----------------------------------------|-------------------------------------------------------------------------------------------------------|
+`celldefine    `endcelldefine   	| Tags a library cell											|
+`default_nettype	        	| Set the net type for implicit net declaration								|
+`define        `undef			| Define  and undefine a text macro									|
+`ifdef  `else  `endif			| condiionally compile code depending upon text macro existence						|
+`include				| Include a source file											|
+`resetall				| Resets directives to their initial state								|
+`timescale				| Set the time units and time precision									|
+`unconnected_drive `nounconnected_drive | Pulls up/Pull down unconnected module inputs								|
+`ifndef        `elsif			| Verilog-2001: more conditional compilation								|
+`line					| Verilog-2001: Overrides reported source file and line upon error					|
+`begin_ketwords  `end_keywords		| Verilog-2001: Reserves keywords for use as identifiers						|
+`pragna					| Verilog-2005: Changes how compulter interprets subsequent source					| 
