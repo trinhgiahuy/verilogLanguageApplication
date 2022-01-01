@@ -142,13 +142,13 @@ always @*
 ## Optimizing Register Count
 - Registering output is preferable for synthesis as it simplifies timing constraints.
 
-State | Encoding | rd_wr | exec |
-------|----------|-------|------|
-IDLE  | 01	 | ?	 | ?	|
-READ  | 00	 | 0	 | 0	|
-WRITE | 10	 | 1     | 0    |
-DONE  | 11	 | ? 	 | 1    |
-match		  state[1] state[0]
+State | Encoding | rd_wr  | exec    |
+------|----------|--------|---------|
+IDLE  | 01	 | ?	  | ?	    |
+READ  | 00	 | 0	  | 0	    | 
+WRITE | 10	 | 1      | 0       |
+DONE  | 11	 | ? 	  | 1       |
+match |		 |state[1]| state[0]|
 ```
 localparam READ = 2'd0, IDLE = 2'd1,
 	   WRITE = 2'd2, DONE = 2'd3;
